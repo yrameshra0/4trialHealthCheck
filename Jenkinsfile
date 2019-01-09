@@ -14,7 +14,7 @@ pipeline {
 
         stage('Update TEST swarm') {
             steps {
-                sh """docker service rm test_${SWARM_SERVICE_NAME}"""
+                // sh """docker service rm test_${SWARM_SERVICE_NAME}"""
 
                 sh """
                 docker service create \
@@ -32,7 +32,7 @@ pipeline {
 
         stage('Update PROD swarm') {
             steps {
-                sh """docker service rm prod_${SWARM_SERVICE_NAME}"""
+                // sh """docker service rm prod_${SWARM_SERVICE_NAME}"""
 
                 sh """
                 docker service create \
