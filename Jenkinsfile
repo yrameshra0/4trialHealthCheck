@@ -23,8 +23,8 @@ pipeline {
                 --hostname ${SWARM_SERVICE_NAME} \
                 --update-delay 10s \
                 --network test \
-                --env BUILD_NUMBER env.BUILD_NUMBER \
-                --env EXECUTE_SPACE test \
+                --env BUILD_NUMBER=env.BUILD_NUMBER \
+                --env EXECUTE_SPACE=test \
                 ${env.SWARM_SERVICE_NAME}:${env.GIT_COMMIT}
                 """
             }
@@ -41,8 +41,8 @@ pipeline {
                 --hostname ${SWARM_SERVICE_NAME} \
                 --update-delay 10s \
                 --network prod \
-                --env BUILD_NUMBER env.BUILD_NUMBER \
-                --env EXECUTE_SPACE prod \
+                --env BUILD_NUMBER=env.BUILD_NUMBER \
+                --env EXECUTE_SPACE=prod \
                 ${env.SWARM_SERVICE_NAME}:${env.GIT_COMMIT}
                 """
             }
