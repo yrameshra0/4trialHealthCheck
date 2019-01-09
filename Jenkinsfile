@@ -14,14 +14,17 @@ pipeline {
 
         stage('Update TEST swarm') {
             steps {
+                sh """docker service rm test_${SWARM_SERVICE_NAME}"""
+
                 sh """
                 docker service create \
                 --replicas 1 \
                 --name test_${SWARM_SERVICE_NAME} \
+                --hostname ${SWARM_SERVICE_NAME}
                 --update-delay 10s \
                 --network test \
-                --env BUILD_NUMBER=env.BUILD_NUMBER \
-                --env EXECUTE_SPACE=test \
+                --env BUILD_NUMBER env.BUILD_NUMBER \
+                --env EXECUTE_SPACE test \
                 ${env.SWARM_SERVICE_NAME}:${env.GIT_COMMIT}
                 """
             }
@@ -29,14 +32,17 @@ pipeline {
 
         stage('Update PROD swarm') {
             steps {
+                sh """docker service rm prod_${SWARM_SERVICE_NAME}"""
+
                 sh """
                 docker service create \
                 --replicas 1 \
                 --name prod_${SWARM_SERVICE_NAME} \
+                --hostname ${SWARM_SERVICE_NAME}
                 --update-delay 10s \
                 --network prod \
-                --env BUILD_NUMBER=env.BUILD_NUMBER \
-                --env EXECUTE_SPACE=prod \
+                --env BUILD_NUMBER env.BUILD_NUMBER \
+                --env EXECUTE_SPACE prod \
                 ${env.SWARM_SERVICE_NAME}:${env.GIT_COMMIT}
                 """
             }
