@@ -20,7 +20,7 @@ pipeline {
                 docker service create \
                 --replicas 1 \
                 --name test_${SWARM_SERVICE_NAME} \
-                --hostname ${SWARM_SERVICE_NAME}
+                --hostname ${SWARM_SERVICE_NAME} \
                 --update-delay 10s \
                 --network test \
                 --env BUILD_NUMBER env.BUILD_NUMBER \
@@ -38,7 +38,7 @@ pipeline {
                 docker service create \
                 --replicas 1 \
                 --name prod_${SWARM_SERVICE_NAME} \
-                --hostname ${SWARM_SERVICE_NAME}
+                --hostname ${SWARM_SERVICE_NAME} \
                 --update-delay 10s \
                 --network prod \
                 --env BUILD_NUMBER env.BUILD_NUMBER \
