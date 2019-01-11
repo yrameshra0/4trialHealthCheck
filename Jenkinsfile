@@ -18,7 +18,7 @@ pipeline {
                 docker service update \
                 --replicas 1 \
                 --update-delay 10s \
-                --env BUILD_NUMBER=${env.BUILD_NUMBER} \
+                --env GIT_COMMIT_ID=${env.GIT_COMMIT} \
                 --env EXECUTE_SPACE=test \
                 --image ${env.SWARM_SERVICE_NAME}:${env.GIT_COMMIT} \
                 test_${env.SWARM_SERVICE_NAME}
@@ -32,8 +32,8 @@ pipeline {
                 docker service update \
                 --replicas 1 \
                 --update-delay 10s \
-                --env BUILD_NUMBER=${env.BUILD_NUMBER} \
-                --env EXECUTE_SPACE=test \
+                --env GIT_COMMIT_ID=${env.GIT_COMMIT} \
+                --env EXECUTE_SPACE=prod \
                 --image ${env.SWARM_SERVICE_NAME}:${env.GIT_COMMIT} \
                 prod_${env.SWARM_SERVICE_NAME}
                 """
